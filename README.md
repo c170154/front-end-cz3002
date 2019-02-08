@@ -42,9 +42,3 @@ Online shopping Mobile App Project For Android Development Tutorials on : https:
 ## Techniques
 RecycleView, ToolBar, CardView, Volley, Gson, ListView, NestedScroll, DrawerLayout, ActionBarDrawerToggle, NavigationView, ProgressBar, DialogFragment, Fragments, BottomSheet and more
 
-## Develeped By
-* Auther : Hosam Azzam
-* Email  : hosam.azzam2@gmail.com
-
-## License
-This project is licensed under the MIT License - see the [License.md](License.md) file for details
