@@ -1,19 +1,15 @@
 package com.cz3002.shopfunding.API;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 import com.android.volley.*;
 import com.android.volley.toolbox.*;
-import com.cz3002.shopfunding.LoginActivity;
-import com.cz3002.shopfunding.MainActivity;
-import com.cz3002.shopfunding.R;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -73,6 +69,28 @@ public class RequestManager {
         RequestFuture<JSONObject> requestFuture = RequestFuture.newFuture();
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST, url, payload, requestFuture, requestFuture);
+        addToRequestQueue(request);
+        try {
+            return requestFuture.get(10, TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    JSONObject getRequest(String url, final String jwt_token) {
+        RequestFuture<JSONObject> requestFuture = RequestFuture.newFuture();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, requestFuture, requestFuture)
+        {
+            /** Pass in authorization headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Authorization", "JWT " + jwt_token);
+                return headers;
+            }
+        };
+
         addToRequestQueue(request);
         try {
             return requestFuture.get(10, TimeUnit.SECONDS);

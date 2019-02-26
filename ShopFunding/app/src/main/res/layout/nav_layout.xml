@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="200dp"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -18,14 +19,14 @@
         app:view_borderWidth="3dp" />
 
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/nav_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:gravity="center"
         android:text="Username"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +46,19 @@
         android:drawableStart="@mipmap/ic_action_home"
         android:gravity="center|start"
         android:text=" Home"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/menu_topup"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:drawableStart="@mipmap/ic_action_topup"
+        android:gravity="center|start"
+        android:text="Top Up"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

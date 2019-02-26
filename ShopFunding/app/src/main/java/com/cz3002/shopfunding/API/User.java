@@ -7,10 +7,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 interface ENDPOINTS {
-    String BASE_URL = "http://10.0.2.2:8000/user/";
-    String VERIFY_TOKEN = BASE_URL + "verify-token/";
-    String GET_TOKEN = BASE_URL + "obtain-token/";
-    String CREATE_USER = BASE_URL;
+    String LOGIN_BASE_URL = "http://10.0.2.2:8000/user/";
+    String BACKEND_BASE_URL = "http://10.0.2.2:5000/user/";
+    String VERIFY_TOKEN = LOGIN_BASE_URL + "verify-token/";
+    String GET_TOKEN = LOGIN_BASE_URL + "obtain-token/";
+    String GET_USER_PROFILE = BACKEND_BASE_URL + "get_profile/";
+    String CREATE_USER = LOGIN_BASE_URL;
 }
 
 public class User {
@@ -23,13 +25,18 @@ public class User {
         editor.apply();
     }
 
+    public static String getJWTToken(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+
+        return prefs.getString(JWT_PREF_NAME, null);
+    }
+
     public static void removeJWTToken(Context context) {
         storeJWTToken(context, null);
     }
 
     public static boolean checkLoginStatus(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        String jwt_token = prefs.getString(JWT_PREF_NAME, null);
+        String jwt_token = getJWTToken(context);
 
         if (jwt_token != null) {
             RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
@@ -80,5 +87,19 @@ public class User {
 
         JSONObject json_response = requestManager.postRequest(ENDPOINTS.CREATE_USER, payload);
         return json_response != null && !json_response.isNull("id");
+    }
+
+    public static Float fetch_balance(Context context, int user_id, String jwt_token) {
+        RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
+        JSONObject json_response = requestManager.getRequest(ENDPOINTS.GET_USER_PROFILE + user_id, jwt_token);
+        if (json_response != null) {
+            try {
+                return (float) json_response.getDouble("balance");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
     }
 }
