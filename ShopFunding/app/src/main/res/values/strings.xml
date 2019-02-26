@@ -13,5 +13,11 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_field_required">This field is required</string>\
+    <string name="select_friend">Select Friend</string>
+    <string name="random">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt arcu sit amet maximus pretium. Pellentesque quis posuere arcu. Nam ligula libero, ultricies et arcu quis, sodales lobortis nisi. Donec libero mauris, rhoncus non auctor ut, rutrum et turpis. Quisque hendrerit lacinia porttitor. Nam eget quam eu sem porttitor euismod. In in consectetur urna, sed mollis odio. Nullam ullamcorper eu dui quis imperdiet. Nullam fermentum, elit vitae tempor tincidunt, elit augue laoreet mi, eu venenatis augue mauris at urna. Mauris eget pretium arcu. Cras tristique, diam quis laoreet tristique, enim turpis volutpat enim, eget egestas purus urna ac ligula.</string>
+    <string name="fund_btn">Request funds</string>
+    <string name="create_request">Create Request</string>
+
+
 </resources>
