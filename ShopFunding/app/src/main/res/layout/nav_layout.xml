@@ -16,7 +16,10 @@
         android:background="@color/colorPrimary"
         android:src="@mipmap/ic_launcher_round"
         app:view_borderColor="@color/colorPrimaryDark"
-        app:view_borderWidth="3dp" />
+        app:view_borderWidth="3dp"
+        android:clickable="false"
+        android:contextClickable="false"
+        android:longClickable="false" />
 
     <TextView
         android:id="@+id/nav_username"
@@ -34,7 +37,9 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@color/colorPrimaryDark" >
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/menu_home"
@@ -50,6 +55,19 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/menu_friend"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:drawableStart="@mipmap/ic_action_friend"
+        android:gravity="center|start"
+        android:text=" Friends"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/menu_topup"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -58,7 +76,20 @@
         android:layout_marginTop="5dp"
         android:drawableStart="@mipmap/ic_action_topup"
         android:gravity="center|start"
-        android:text="Top Up"
+        android:text=" Top Up"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/menu_transaction"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:drawableStart="@mipmap/ic_action_history"
+        android:gravity="center|start"
+        android:text=" Transaction History"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

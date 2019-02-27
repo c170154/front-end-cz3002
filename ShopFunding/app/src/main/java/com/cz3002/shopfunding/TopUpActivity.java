@@ -10,17 +10,17 @@ import com.cz3002.shopfunding.API.User;
 import com.cz3002.shopfunding.Helper.FetchBalanceTask;
 import com.cz3002.shopfunding.Model.UserProfile;
 
-public class TopUpActivity extends AppCompatActivity {
-    private UserProfile userProfile;
+public class TopUpActivity extends BaseActivity {
     private GetBalanceTask mAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_up);
+        super.onCreateDrawer();
+        getSupportActionBar().setTitle("Top Up");
 
-        userProfile = new UserProfile(getApplicationContext());
-        mAsyncTask = new GetBalanceTask(getApplicationContext(), userProfile);
+        mAsyncTask = new GetBalanceTask(getApplicationContext(), this.userProfile);
         mAsyncTask.execute((Void) null);
     }
 

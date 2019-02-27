@@ -43,6 +43,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        Button mBackToLoginButton = (Button) findViewById(R.id.back_to_login);
+        mBackToLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RegisterActivity.this.startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                RegisterActivity.this.finish();
+            }
+        });
+
         mRegisterFormView = findViewById(R.id.register_form);
         mProgressView = findViewById(R.id.register_progress);
     }

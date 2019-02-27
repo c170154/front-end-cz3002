@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.cz3002.shopfunding.API.User;
-import org.json.JSONObject;
 
 
 /**
