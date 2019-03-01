@@ -74,12 +74,12 @@ public class SideNavigation {
         TransactionHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (!(activity instanceof xxActivity)) {
-//                    activity.startActivity(new Intent(activity, xxActivity.class));
-//                    activity.finish();
-//                } else {
-//                    drawerLayout.closeDrawers();
-//                }
+                if (!(activity instanceof TransactionActivity)) {
+                    activity.startActivity(new Intent(activity, TransactionActivity.class));
+                    activity.finish();
+                } else {
+                    drawerLayout.closeDrawers();
+                }
             }
         });
 

@@ -7,7 +7,7 @@ android:background="@android:color/white"
 android:fitsSystemWindows="true"
 android:orientation="vertical">
 
-<include layout="@layout/toolbar_layout" />
+<include layout="@layout/layout_toolbar" />
 
 <android.support.v4.widget.DrawerLayout
 
@@ -17,16 +17,10 @@ android:orientation="vertical">
     android:background="@android:color/white"
     android:fitsSystemWindows="true">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/balance" />
-    </FrameLayout>
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/content_topup" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
@@ -36,7 +30,7 @@ android:orientation="vertical">
         android:fitsSystemWindows="true"
         android:visibility="invisible">
 
-        <include layout="@layout/nav_layout" />
+        <include layout="@layout/layout_nav" />
     </android.support.design.widget.NavigationView>
 
 

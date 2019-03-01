@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
 
-    <include layout="@layout/toolbar_layout" />
+    <include layout="@layout/layout_toolbar" />
 
     <TextView
         android:id="@+id/textView"

@@ -20,11 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".TopUpActivity"/>
-        <activity android:name=".FriendListActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".TopUpActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".FriendListActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".TransactionActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".FundRequestActivity"></activity>
     </application>
 
 </manifest>

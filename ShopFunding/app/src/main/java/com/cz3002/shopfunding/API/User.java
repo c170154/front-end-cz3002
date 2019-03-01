@@ -5,15 +5,6 @@ import android.content.SharedPreferences;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-interface ENDPOINTS {
-    String LOGIN_BASE_URL = "http://10.0.2.2:8000/user/";
-    String BACKEND_BASE_URL = "http://10.0.2.2:5000/user/";
-    String VERIFY_TOKEN = LOGIN_BASE_URL + "verify-token/";
-    String GET_TOKEN = LOGIN_BASE_URL + "obtain-token/";
-    String GET_USER_PROFILE = BACKEND_BASE_URL + "get_profile/";
-    String CREATE_USER = LOGIN_BASE_URL;
-}
-
 public class User {
     private static String PREF_NAME = "APP_PREFS";
     private static String JWT_PREF_NAME = "JWT_TOKEN";
@@ -45,7 +36,7 @@ public class User {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JSONObject json_response = requestManager.postRequest(ENDPOINTS.VERIFY_TOKEN, payload);
+            JSONObject json_response = requestManager.postRequest(ENDPOINTS.VERIFY_TOKEN, payload, null);
             return json_response != null && !json_response.isNull("token");
         }
 
@@ -62,7 +53,7 @@ public class User {
             e.printStackTrace();
         }
 
-        JSONObject json_response = requestManager.postRequest(ENDPOINTS.GET_TOKEN, payload);
+        JSONObject json_response = requestManager.postRequest(ENDPOINTS.GET_TOKEN, payload, null);
         if (json_response != null && !json_response.isNull("token")) {
             try {
                 return json_response.getString("token");
@@ -84,13 +75,35 @@ public class User {
             e.printStackTrace();
         }
 
-        JSONObject json_response = requestManager.postRequest(ENDPOINTS.CREATE_USER, payload);
+        JSONObject json_response = requestManager.postRequest(ENDPOINTS.CREATE_USER, payload, null);
         return json_response != null && !json_response.isNull("id");
     }
 
     public static Float fetch_balance(Context context, int user_id, String jwt_token) {
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
         JSONObject json_response = requestManager.getRequest(ENDPOINTS.GET_USER_PROFILE + user_id, jwt_token);
+        if (json_response != null) {
+            try {
+                return (float) json_response.getDouble("balance");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
+    public static Float top_up(Context context, int user_id, int amount, String jwt_token) {
+        RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
+        JSONObject payload = new JSONObject();
+        try {
+            payload.put("user_id", user_id);
+            payload.put("amount", amount);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject json_response = requestManager.postRequest(ENDPOINTS.TOP_UP, payload, jwt_token);
         if (json_response != null) {
             try {
                 return (float) json_response.getDouble("balance");
