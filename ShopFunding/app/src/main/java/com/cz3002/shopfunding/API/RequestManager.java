@@ -26,6 +26,7 @@ interface ENDPOINTS {
     String GET_USER_PROFILE = BACKEND_BASE_URL + "user/get_profile/";
     String TOP_UP = BACKEND_BASE_URL + "user/top_up/";
     String FUND_REQUEST = BACKEND_BASE_URL + "fundrequest/";
+    String FRIEND_FUND_REQUEST = "/get_friends_fund_request";
 }
 
 public class RequestManager {

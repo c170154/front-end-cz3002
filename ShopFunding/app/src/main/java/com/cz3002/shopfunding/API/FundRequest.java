@@ -36,7 +36,33 @@ public class FundRequest {
 
     public static ArrayList<FundingRequest> fetchFundRequests(Context context) {
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
-        JSONArray json_response = requestManager.getRequest_JSONArray(context, ENDPOINTS.FUND_REQUEST);
+        JSONArray json_response = requestManager.getRequest_JSONArray(context, ENDPOINTS.FUND_REQUEST + "mine");
+        if (json_response != null) {
+            ArrayList<FundingRequest> fundRequests = new ArrayList<>();
+            try {
+                for (int i=0; i < json_response.length(); i++) {
+                    JSONObject jsonObject = json_response.getJSONObject(i);
+                    String creationDate = jsonObject.getString("creation_date");
+                    JSONObject product = jsonObject.getJSONObject("product");
+                    String productName = product.getString("name");
+                    String description = product.getString("description");
+                    String url = product.getString("original_url");
+                    float goal = (float) jsonObject.getDouble("goal");
+                    fundRequests.add(new FundingRequest(productName, description, creationDate, url, goal));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return fundRequests;
+        }
+
+        return null;
+    }
+
+    public static ArrayList<FundingRequest> fetchFriendFundRequests(Context context, int userID) {
+        RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
+        JSONArray json_response = requestManager.getRequest_JSONArray(
+                context, ENDPOINTS.FUND_REQUEST + userID + ENDPOINTS.FRIEND_FUND_REQUEST);
         if (json_response != null) {
             ArrayList<FundingRequest> fundRequests = new ArrayList<>();
             try {

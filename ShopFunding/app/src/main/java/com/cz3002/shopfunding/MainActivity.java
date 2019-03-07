@@ -17,12 +17,17 @@ import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
     // RecyclerView
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter adapter;
+    private RecyclerView requestRecyclerView;
+    private RecyclerView.LayoutManager requestLayoutManager;
+    private RecyclerView.Adapter requestAdapter;
+
+    private RecyclerView friendRequestRecyclerView;
+    private RecyclerView.LayoutManager friendRequestLayoutManager;
+    private RecyclerView.Adapter friendRequestAdapter;
 
     // Async API call task
     private GetRequestListTask mGetRequestListTask;
+    private GetFriendRequestListTask mGetFriendRequestListTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +45,21 @@ public class MainActivity extends BaseActivity {
         });
 
         // Initialize RecyclerView
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_my_requests);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        requestRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_my_requests);
+        requestLayoutManager = new LinearLayoutManager(this);
+        requestRecyclerView.setLayoutManager(requestLayoutManager);
+        requestRecyclerView.setNestedScrollingEnabled(false);
+
+        friendRequestRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_friendrequest);
+        friendRequestLayoutManager = new LinearLayoutManager(this);
+        friendRequestRecyclerView.setLayoutManager(friendRequestLayoutManager);
+        friendRequestRecyclerView.setNestedScrollingEnabled(false);
 
         mGetRequestListTask = new GetRequestListTask(getApplicationContext(), this.userProfile);
         mGetRequestListTask.execute((Void) null);
+
+        mGetFriendRequestListTask = new GetFriendRequestListTask(getApplicationContext(), this.userProfile);
+        mGetFriendRequestListTask.execute((Void) null);
     }
 
     // Async API call task
@@ -68,8 +82,33 @@ public class MainActivity extends BaseActivity {
             mGetRequestListTask = null;
 
             if (requests != null) {
-                adapter = new FundRequestListAdapter(requests);
-                recyclerView.setAdapter(adapter);
+                requestAdapter = new FundRequestListAdapter(requests);
+                requestRecyclerView.setAdapter(requestAdapter);
+            }
+        }
+    }
+
+    private class GetFriendRequestListTask extends AsyncTask<Void, Void, ArrayList<FundingRequest>> {
+        private final Context mContext;
+        private final int mUserID;
+
+        GetFriendRequestListTask(Context context, UserProfile userProfile) {
+            mContext = context;
+            mUserID = userProfile.get_user_id();
+        }
+
+        @Override
+        protected ArrayList<FundingRequest> doInBackground(Void... params) {
+            return FundRequest.fetchFriendFundRequests(mContext, userProfile.get_user_id());
+        }
+
+        @Override
+        protected void onPostExecute(final ArrayList<FundingRequest> requests) {
+            mGetRequestListTask = null;
+
+            if (requests != null) {
+                friendRequestAdapter = new FundRequestListAdapter(requests);
+                friendRequestRecyclerView.setAdapter(friendRequestAdapter);
             }
         }
     }
