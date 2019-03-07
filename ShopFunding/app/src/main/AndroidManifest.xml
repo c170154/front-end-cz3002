@@ -33,6 +33,7 @@
             android:name=".TransactionActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".FundRequestActivity"></activity>
+        <activity android:name=".AddContributorActivity"></activity>
     </application>
 
 </manifest>

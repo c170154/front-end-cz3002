@@ -2,8 +2,12 @@ package com.cz3002.shopfunding.API;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.cz3002.shopfunding.Model.UserProfile;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class User {
     private static String PREF_NAME = "APP_PREFS";
@@ -36,7 +40,7 @@ public class User {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JSONObject json_response = requestManager.postRequest(ENDPOINTS.VERIFY_TOKEN, payload, null);
+            JSONObject json_response = requestManager.postRequest(context, ENDPOINTS.VERIFY_TOKEN, payload);
             return json_response != null && !json_response.isNull("token");
         }
 
@@ -53,7 +57,7 @@ public class User {
             e.printStackTrace();
         }
 
-        JSONObject json_response = requestManager.postRequest(ENDPOINTS.GET_TOKEN, payload, null);
+        JSONObject json_response = requestManager.postRequest(context, ENDPOINTS.GET_TOKEN, payload);
         if (json_response != null && !json_response.isNull("token")) {
             try {
                 return json_response.getString("token");
@@ -75,13 +79,67 @@ public class User {
             e.printStackTrace();
         }
 
-        JSONObject json_response = requestManager.postRequest(ENDPOINTS.CREATE_USER, payload, null);
+        JSONObject json_response = requestManager.postRequest(context, ENDPOINTS.CREATE_USER, payload);
+        try {
+            requestManager.getRequest(context, ENDPOINTS.GET_USER_PROFILE + json_response.getInt("id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return json_response != null && !json_response.isNull("id");
     }
 
-    public static Float fetch_balance(Context context, int user_id, String jwt_token) {
+    public static ArrayList<String> fetchFriendList(Context context, int user_id) {
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
-        JSONObject json_response = requestManager.getRequest(ENDPOINTS.GET_USER_PROFILE + user_id, jwt_token);
+        JSONObject json_response = requestManager.getRequest(context, ENDPOINTS.GET_USER_PROFILE + user_id);
+        if (json_response != null) {
+            ArrayList<String> friendList = new ArrayList<>();
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = json_response.getJSONArray("friends");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            assert jsonArray != null;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    friendList.add(jsonObject.getString("username"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return friendList;
+        }
+
+        return null;
+    }
+
+    public static UserProfile addFriend(Context context, int userID, String friendUsername) {
+        RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
+        JSONObject payload = new JSONObject();
+        try {
+            payload.put("username", friendUsername);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String url = ENDPOINTS.BACKEND_BASE_URL + "user/" + userID + ENDPOINTS.ADD_FRIEND;
+        JSONObject json_response = requestManager.postRequest(context, url, payload);
+        if (json_response != null) {
+            try {
+                return new UserProfile(json_response.getInt("id"), json_response.getString("username"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
+    public static Float fetch_balance(Context context, int user_id) {
+        RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
+        JSONObject json_response = requestManager.getRequest(context, ENDPOINTS.GET_USER_PROFILE + user_id);
         if (json_response != null) {
             try {
                 return (float) json_response.getDouble("balance");
@@ -93,7 +151,7 @@ public class User {
         return null;
     }
 
-    public static Float top_up(Context context, int user_id, int amount, String jwt_token) {
+    public static Float top_up(Context context, int user_id, int amount) {
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
         JSONObject payload = new JSONObject();
         try {
@@ -103,7 +161,7 @@ public class User {
             e.printStackTrace();
         }
 
-        JSONObject json_response = requestManager.postRequest(ENDPOINTS.TOP_UP, payload, jwt_token);
+        JSONObject json_response = requestManager.postRequest(context, ENDPOINTS.TOP_UP, payload);
         if (json_response != null) {
             try {
                 return (float) json_response.getDouble("balance");

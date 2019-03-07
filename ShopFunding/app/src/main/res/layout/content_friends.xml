@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/add_username"
+                android:id="@+id/input_username"
                 android:layout_weight="1"
                 android:hint="Username"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"

@@ -9,11 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import com.cz3002.shopfunding.API.FundRequest;
-import com.cz3002.shopfunding.API.User;
 import com.cz3002.shopfunding.Adapter.FundRequestListAdapter;
-import com.cz3002.shopfunding.Adapter.TransactionHistoryAdapter;
 import com.cz3002.shopfunding.Model.FundingRequest;
-import com.cz3002.shopfunding.Model.Transaction;
 import com.cz3002.shopfunding.Model.UserProfile;
 
 import java.util.ArrayList;
@@ -49,18 +46,6 @@ public class MainActivity extends BaseActivity {
 
         mGetRequestListTask = new GetRequestListTask(getApplicationContext(), this.userProfile);
         mGetRequestListTask.execute((Void) null);
-
-        // TODO: remove dummmy data
-        FundingRequest t1 = new FundingRequest("Product 1", "", "", 50);
-        FundingRequest t2 = new FundingRequest("Product 2", "", "", 200);
-        FundingRequest t3 = new FundingRequest("Product 3", "", "", 10000);
-        ArrayList<FundingRequest> fundingRequests = new ArrayList<>();
-        fundingRequests.add(t1);
-        fundingRequests.add(t2);
-        fundingRequests.add(t3);
-
-        adapter = new FundRequestListAdapter(fundingRequests);
-        recyclerView.setAdapter(adapter);
     }
 
     // Async API call task
@@ -68,32 +53,24 @@ public class MainActivity extends BaseActivity {
         private final Context mContext;
         private final int mUserID;
 
-        private String jwt_token;
-
         GetRequestListTask(Context context, UserProfile userProfile) {
             mContext = context;
             mUserID = userProfile.get_user_id();
-
-            this.jwt_token = User.getJWTToken(context);
         }
 
         @Override
         protected ArrayList<FundingRequest> doInBackground(Void... params) {
-            return FundRequest.fetchFundRequests(mContext, jwt_token);
+            return FundRequest.fetchFundRequests(mContext);
         }
 
         @Override
         protected void onPostExecute(final ArrayList<FundingRequest> requests) {
+            mGetRequestListTask = null;
+
             if (requests != null) {
                 adapter = new FundRequestListAdapter(requests);
                 recyclerView.setAdapter(adapter);
             }
-            mGetRequestListTask = null;
-        }
-
-        @Override
-        protected void onCancelled() {
-            mGetRequestListTask = null;
         }
     }
 }

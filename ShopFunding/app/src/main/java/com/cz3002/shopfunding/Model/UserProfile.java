@@ -7,13 +7,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserProfile {
-    private String jwt_token;
     private int user_id;
     private String username;
 
     public UserProfile(Context context) {
-        this.jwt_token = User.getJWTToken(context);
-        JSONObject jwt_body = decode_jwt(this.jwt_token);
+        String jwt_token = User.getJWTToken(context);
+        JSONObject jwt_body = decode_jwt(jwt_token);
         if (jwt_body != null) {
             try {
                 this.user_id = jwt_body.getInt("user_id");
@@ -22,6 +21,11 @@ public class UserProfile {
                 e.printStackTrace();
             }
         }
+    }
+
+    public UserProfile(int id, String username) {
+        this.user_id = id;
+        this.username = username;
     }
 
     private static JSONObject decode_jwt(String jwt_token) {

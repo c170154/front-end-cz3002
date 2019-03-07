@@ -9,8 +9,10 @@ import android.widget.TextView;
 import com.cz3002.shopfunding.Model.FundingRequest;
 import com.cz3002.shopfunding.R;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FundRequestListAdapter extends RecyclerView.Adapter<FundRequestListAdapter.FundRequestViewHolder> {
     private List<FundingRequest> mFundingRequests;
@@ -47,8 +49,11 @@ public class FundRequestListAdapter extends RecyclerView.Adapter<FundRequestList
     public void onBindViewHolder(FundRequestViewHolder holder, int position) {
         holder.productName.setText(mFundingRequests.get(position).getProductName());
         holder.date.setText(mFundingRequests.get(position).getCreationDate());
-        holder.progress.setText(Float.toString(mFundingRequests.get(position).getProgress()));
-        holder.goal.setText(Float.toString(mFundingRequests.get(position).getGoal()));
+        float goal = mFundingRequests.get(position).getGoal();
+        float progress = mFundingRequests.get(position).getProgress();
+        holder.goal.setText(Float.toString(goal));
+        NumberFormat format = NumberFormat.getPercentInstance(Locale.US);
+        holder.progress.setText(format.format(progress / goal * 100));
     }
 
     @Override

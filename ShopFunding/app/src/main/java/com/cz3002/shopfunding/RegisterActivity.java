@@ -165,11 +165,5 @@ public class RegisterActivity extends AppCompatActivity {
                 mUsernameView.requestFocus();
             }
         }
-
-        @Override
-        protected void onCancelled() {
-            mRegisterTask = null;
-            showProgress(false);
-        }
     }
 }

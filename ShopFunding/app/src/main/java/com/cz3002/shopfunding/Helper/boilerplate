@@ -1,0 +1,177 @@
+1. [API Wrapper](#api)
+2. [AsyncTask](#async)
+3. [Activity](#activity)
+4. [Activity layout](#activity-layout)
+5. [RecyclerView](#recycler)
+6. [RecyclerView Adapter](#recycler-adapter)
+7. [RecyclerView Layout](#recycler-layout)
+
+### API Wrapper <a name="api"></a>
+```
+RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
+
+// create payload if required
+
+// make requests
+postRequest(final Context context, String url, JSONObject payload)
+getRequest(final Context context, String url)
+getRequest_JSONArray(final Context context, String url)
+```
+
+### AsyncTask <a name="async"></a>
+```
+// Execute AsyncTask
+mAsyncTask = new ###Task(getApplicationContext(), ###);
+mAsyncTask.execute((Void) null);
+
+public class ###Task extends AsyncTask<Void, Void, ###> {
+    private final Context mContext;
+    // other variables required for API call
+
+    ###Task(Context context, ###) {
+        mContext = context;
+        // other variables required for API call
+    }
+
+    @Override
+    protected ### doInBackground(Void... params) {
+        // make API call
+    }
+
+    @Override
+    protected void onPostExecute(final ###) {
+        ###Task = null;
+
+        // perform actions on returned ###
+    }
+}
+```
+
+### Activity <a name="activity"></a>
+```
+public class ### extends BaseActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.###);
+        super.onCreateDrawer();
+        getSupportActionBar().setTitle(###);
+    }
+}
+```
+
+### Activity Layout <a name="activity-layout"></a>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <android.support.v4.widget.DrawerLayout
+
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/content_###" />
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true">
+
+            <include layout="@layout/layout_nav" />
+        </android.support.design.widget.NavigationView>
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
+```
+
+### RecyclerView <a name="recycler"></a>
+```
+// RecyclerView
+private RecyclerView recyclerView;
+private RecyclerView.LayoutManager layoutManager;
+private RecyclerView.Adapter adapter;
+
+// Initialize RecyclerView
+recyclerView = (RecyclerView) findViewById(R.id.###);
+layoutManager = new LinearLayoutManager(this);
+recyclerView.setLayoutManager(layoutManager);
+adapter = new TransactionHistoryAdapter(transactions);
+recyclerView.setAdapter(adapter);
+```
+
+### RecyclerView Adapter <a name="recycler-adapter"></a>
+```
+public class ###Adapter extends RecyclerView.Adapter<###Adapter.###ViewHolder> {
+    private List<###> ###;
+
+    public TransactionHistoryAdapter(List<###> ###) {
+        // initialize list
+    }
+
+    public static class ###ViewHolder extends RecyclerView.ViewHolder {
+        // views
+
+        public ###ViewHolder(View v) {
+            super(v);
+            
+            // initialize views using v.findViewById
+        }
+    }
+
+    @Override
+    @NonNull
+    public ###ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.###, parent, false);
+
+        ###ViewHolder vh = new ###ViewHolder(v);
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(###ViewHolder holder, int position) {
+        // modifies views in holder
+    }
+
+    @Override
+    public int getItemCount() {
+    }
+}
+```
+
+### RecyclerView Layout <a name="recycler-layout"></a>
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="2dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CardView.Light"
+        app:cardElevation="1dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/Widget.MaterialComponents.CardView">
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
+```

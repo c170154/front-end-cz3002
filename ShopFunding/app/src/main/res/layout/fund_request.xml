@@ -1,33 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
 
-    <include layout="@layout/layout_toolbar" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_launcher_background"
+            android:scaleX="5"
+            android:scaleY="5" />
+
+    </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="127dp"
-        android:text="Request details" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="158dp"
-        android:text="Contributor details" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="193dp"
         android:layout_height="wrap_content"
-        android:text="contribute" />
+        android:id="@+id/progressbar_funded"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        android:paddingTop="2dp"
+        tools:text="S$20 out of S$30 funded"
+        android:textColor="@color/colorPrimary" />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:progress="66"
+        android:minHeight="10dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="?android:attr/windowBackground">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.CardView">
+
+                <TextView
+                    android:text="Product Details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:padding="@dimen/activity_vertical_margin"
+                    android:textSize="16dp"
+                    android:background="@color/white"
+                    android:elevation="1dp" />
+
+            </android.support.v7.widget.CardView>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="4dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:text="Product Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="150dp"
+                        android:text="Product 1"
+                        tools:text="product"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:text="Description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView9"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_product_description"
+                        android:text="A description"
+                        tools:text="very very very long description that reaches third line"
+                        android:maxLines="5"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:text="Quantity"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:text="Quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_quantity"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:text="Total Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView14"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:text="S$120"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_total_price"
+                        tools:text="S$120"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+                </TableRow>
+            </TableLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbarStyle="outsideOverlay"
+                style="@style/Widget.MaterialComponents.CardView">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/activity_vertical_margin">
+
+                    <TextView
+                        android:text="Contributors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/colorPrimary" />
+
+                    <Button
+                        android:text="  Invite Friend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/button_invite_friend"
+                        android:drawableStart="@mipmap/ic_action_friend"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimary"
+                        android:padding="4dp" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/recyclerview_invited_friend" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <Button
+            android:text="Contribute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_create_request"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            android:clickable="true" />
+
+    </LinearLayout>
 
 </LinearLayout>
