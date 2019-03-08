@@ -33,9 +33,9 @@ public class AddContributorActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contributor);
         super.onCreateDrawer();
-        getSupportActionBar().setTitle("Add Contributor(s)");
+        getSupportActionBar().setTitle("Add Contribution(s)");
 
-        selectedUsername = new ArrayList<String>();
+        selectedUsername = new ArrayList<>();
 
         // Add contributor
         Button confirm = findViewById(R.id.btn_add_contributor);
@@ -57,7 +57,8 @@ public class AddContributorActivity extends BaseActivity {
             @Override
             @NonNull
             public FriendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.inflate_contributor, parent, false);
+                View v = LayoutInflater.from(parent.getContext()).inflate(
+                        R.layout.inflate_friend_invitation, parent, false);
 
                 FriendViewHolder vh = new FriendViewHolder(v);
                 return vh;
@@ -99,7 +100,8 @@ public class AddContributorActivity extends BaseActivity {
 
         @Override
         protected ArrayList<String> doInBackground(Void... params) {
-            return User.fetchFriendList(mContext, mUserID);
+            ArrayList<String> s = User.fetchFriendList(mContext, mUserID);
+            return s;
         }
 
         @Override

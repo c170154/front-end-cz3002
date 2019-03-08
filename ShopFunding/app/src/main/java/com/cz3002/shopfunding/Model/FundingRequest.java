@@ -1,19 +1,35 @@
 package com.cz3002.shopfunding.Model;
 
 public class FundingRequest {
+    private int mID;
+    private String mAuthor;
     private String mProductName;
     private String mDescription;
     private String mUrl;
     private float mGoal;
     private String mCreationDate;
-    private float mProgress = 0;
+    private float mRemainingFund = 0;
 
-    public FundingRequest(String productName, String description, String creationDate, String url, float goal) {
+    public FundingRequest(
+            int id, String author, String productName, String description, String creationDate, String url,
+            float goal, float remainingFund
+    ) {
+        mID = id;
+        mAuthor = author;
         mProductName = productName;
         mDescription = description;
         mCreationDate = creationDate;
         mUrl = url;
         mGoal = goal;
+        mRemainingFund = remainingFund;
+    }
+
+    public int getID() {
+        return mID;
+    }
+
+    public String getAuthor() {
+        return mAuthor;
     }
 
     public String getProductName() {
@@ -25,7 +41,7 @@ public class FundingRequest {
         return mCreationDate;
     }
 
-    public String getmDescription() {
+    public String getDescription() {
         return mDescription;
     }
 
@@ -34,9 +50,9 @@ public class FundingRequest {
         return mUrl;
     }
 
-    public float getProgress()
+    public float getmRemainingFund()
     {
-        return mProgress;
+        return mRemainingFund;
     }
 
     public float getGoal()

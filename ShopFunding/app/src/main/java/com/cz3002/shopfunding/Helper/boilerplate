@@ -13,9 +13,9 @@ RequestManager requestManager = RequestManager.getInstance(context.getApplicatio
 // create payload if required
 
 // make requests
-postRequest(final Context context, String url, JSONObject payload)
-getRequest(final Context context, String url)
-getRequest_JSONArray(final Context context, String url)
+JSONObject json_response = requestManager.postRequest(final Context context, String url, JSONObject payload)
+JSONObject json_response = requestManager.getRequest(final Context context, String url)
+JSONArray json_response = requestManager.getRequest_JSONArray(final Context context, String url)
 ```
 
 ### AsyncTask <a name="async"></a>

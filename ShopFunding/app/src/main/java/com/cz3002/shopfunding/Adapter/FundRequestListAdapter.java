@@ -1,11 +1,17 @@
 package com.cz3002.shopfunding.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.cz3002.shopfunding.API.FundRequest;
+import com.cz3002.shopfunding.FundRequestActivity;
+import com.cz3002.shopfunding.FundRequestDetailActivity;
 import com.cz3002.shopfunding.Model.FundingRequest;
 import com.cz3002.shopfunding.R;
 
@@ -22,17 +28,23 @@ public class FundRequestListAdapter extends RecyclerView.Adapter<FundRequestList
     }
 
     public static class FundRequestViewHolder extends RecyclerView.ViewHolder {
-        public TextView productName;
-        public TextView date;
-        public TextView progress;
-        public TextView goal;
+        private CardView fundRequest;
+        private TextView productName;
+        private TextView date;
+        private TextView progress;
+        private TextView goal;
+
+        private Context context;
 
         public FundRequestViewHolder(View v) {
             super(v);
+            this.fundRequest = v.findViewById(R.id.card_fund_request);
             this.productName = v.findViewById(R.id.tv_product_name);
             this.date = v.findViewById(R.id.tv_creation_date);
             this.progress = v.findViewById(R.id.tv_progress);
             this.goal = v.findViewById(R.id.tv_goal);
+
+            context = v.getContext();
         }
     }
 
@@ -46,14 +58,26 @@ public class FundRequestListAdapter extends RecyclerView.Adapter<FundRequestList
     }
 
     @Override
-    public void onBindViewHolder(FundRequestViewHolder holder, int position) {
-        holder.productName.setText(mFundingRequests.get(position).getProductName());
-        holder.date.setText(mFundingRequests.get(position).getCreationDate());
-        float goal = mFundingRequests.get(position).getGoal();
-        float progress = mFundingRequests.get(position).getProgress();
-        holder.goal.setText(Float.toString(goal));
-        NumberFormat format = NumberFormat.getPercentInstance(Locale.US);
-        holder.progress.setText(format.format(progress / goal * 100));
+    public void onBindViewHolder(final FundRequestViewHolder holder, int position) {
+        final FundingRequest fundRequest = mFundingRequests.get(position);
+
+        holder.productName.setText(fundRequest.getProductName());
+        holder.date.setText(fundRequest.getCreationDate());
+
+        float goal = fundRequest.getGoal();
+        float progress = (goal - fundRequest.getmRemainingFund()) / goal;
+        holder.goal.setText("Goal: S$" + goal);
+        holder.progress.setText(NumberFormat.getPercentInstance(Locale.US).format(progress));
+
+        // onClick handler to navigate to contribute activity
+        holder.fundRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent activityIntent = new Intent(holder.context, FundRequestDetailActivity.class);
+                activityIntent.putExtra("request_id", fundRequest.getID());
+                holder.context.startActivity(activityIntent);
+            }
+        });
     }
 
     @Override

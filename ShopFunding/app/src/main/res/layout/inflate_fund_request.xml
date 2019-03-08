@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/CardView.Light"
-        app:cardElevation="1dp">
+        app:cardElevation="1dp"
+        android:id="@+id/card_fund_request">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -69,7 +70,7 @@
                 android:textSize="30sp"
                 android:textColor="@android:color/holo_blue_dark"
                 tools:text="100%"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.45" />
 
             <TextView
                 android:text="Goal: S$100"

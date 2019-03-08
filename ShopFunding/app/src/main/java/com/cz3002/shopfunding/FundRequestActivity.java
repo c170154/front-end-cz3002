@@ -6,21 +6,22 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cz3002.shopfunding.API.FundRequest;
 import com.cz3002.shopfunding.Adapter.FriendListAdapter;
+import com.cz3002.shopfunding.Model.FundingRequest;
 import com.cz3002.shopfunding.Model.UserProfile;
 
 import java.util.ArrayList;
 
-import static java.lang.Integer.parseInt;
 
 public class FundRequestActivity extends BaseActivity {
     private CreateRequestTask mCreateRequestTask;
+    private AddContributorsTask mAddContributorsTask;
 
     private ArrayList<String> mSelected;
 
@@ -44,16 +45,10 @@ public class FundRequestActivity extends BaseActivity {
                 String description = ((TextView) findViewById(R.id.tv_product_description)).getText().toString();
                 // TODO: get url from product page
                 String url = "www.randomurl.com";
-                String input = ((EditText) findViewById(R.id.input_quantity)).getText().toString();
-                if (!input.equals("")) {
-                    int quantity = parseInt(input);
-                    float goal = quantity * 120;
-                    mCreateRequestTask = new CreateRequestTask(getApplicationContext(), userProfile,
-                            productName, description,url, goal);
-                    mCreateRequestTask.execute((Void) null);
-                } else {
-                    // TODO: invalidate text field
-                }
+                float goal = 120;
+                mCreateRequestTask = new CreateRequestTask(getApplicationContext(), userProfile,
+                        productName, description,url, goal);
+                mCreateRequestTask.execute((Void) null);
             }
         });
 
@@ -98,7 +93,7 @@ public class FundRequestActivity extends BaseActivity {
     }
 
     // Async tasks for API call
-    public class CreateRequestTask extends AsyncTask<Void, Void, Boolean> {
+    class CreateRequestTask extends AsyncTask<Void, Void, Integer> {
         private final Context mContext;
         private final int mUserID;
         private final String mProductName;
@@ -117,16 +112,42 @@ public class FundRequestActivity extends BaseActivity {
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Integer doInBackground(Void... params) {
             return FundRequest.createRequest(mContext, mProductName, mDescription, mUrl, mGoal);
         }
 
         @Override
-        protected void onPostExecute(final Boolean isSuccessful) {
+        protected void onPostExecute(final Integer id) {
             mCreateRequestTask = null;
-            if (isSuccessful) {
-                Toast.makeText(FundRequestActivity.this, "Request created successfully!", Toast.LENGTH_SHORT).show();
+            if (id != -1) {
+                mAddContributorsTask = new AddContributorsTask(mContext, id, mSelected.toArray(new String[0]));
+                mAddContributorsTask.execute((Void) null);
+            }
+        }
+    }
 
+    class AddContributorsTask extends AsyncTask<Void, Void, Boolean> {
+        private final Context mContext;
+        private final int mRequestID;
+        private final String[] mUsernames;
+
+        public AddContributorsTask(Context context, int requestID, String[] usernames) {
+            mContext = context;
+            mRequestID = requestID;
+            mUsernames = usernames;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return FundRequest.addContributors(mContext, mRequestID, mUsernames);
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean isSuccessful) {
+            mAddContributorsTask = null;
+
+            if (isSuccessful) {
+                Toast.makeText(mContext, "Request created successfully!", Toast.LENGTH_SHORT).show();
             }
 
             Intent activityIntent = new Intent(FundRequestActivity.this, MainActivity.class);

@@ -26,7 +26,9 @@ interface ENDPOINTS {
     String GET_USER_PROFILE = BACKEND_BASE_URL + "user/get_profile/";
     String TOP_UP = BACKEND_BASE_URL + "user/top_up/";
     String FUND_REQUEST = BACKEND_BASE_URL + "fundrequest/";
+    String CONTRIBUTIONS = "/contributions/";
     String FRIEND_FUND_REQUEST = "/get_friends_fund_request";
+    String CONTRIBUTION = FUND_REQUEST + "contributions/";
 }
 
 public class RequestManager {
@@ -141,6 +143,32 @@ public class RequestManager {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "JWT " + jwt_token);
+                return headers;
+            }
+        };
+        addToRequestQueue(request);
+        try {
+            return requestFuture.get(10, TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    JSONObject patchRequest(final Context context, String url, JSONObject payload) {
+        RequestFuture<JSONObject> requestFuture = RequestFuture.newFuture();
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.PATCH, url, payload, requestFuture, requestFuture)
+        {
+            /** Pass in authorization headers* */
+            String jwt_token = User.getJWTToken(context);
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "");
+                if (jwt_token != null) {
+                    headers.put("Authorization", "JWT " + jwt_token);
+                }
                 return headers;
             }
         };
