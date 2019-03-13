@@ -17,12 +17,7 @@
         android:background="@android:color/white"
         android:fitsSystemWindows="true">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!--custom view here -->
-        </FrameLayout>
+        <include layout="@layout/content_fund_request_detail" />
 
         <android.support.design.widget.NavigationView
             android:id="@+id/navigation_view"
@@ -33,8 +28,5 @@
 
             <include layout="@layout/layout_nav" />
         </android.support.design.widget.NavigationView>
-
-
     </android.support.v4.widget.DrawerLayout>
-
 </LinearLayout>

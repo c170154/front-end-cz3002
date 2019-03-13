@@ -192,12 +192,6 @@ public class LoginActivity extends AppCompatActivity {
                 mPasswordView.requestFocus();
             }
         }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
     }
 }
 

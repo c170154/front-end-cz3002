@@ -43,22 +43,4 @@ public class TransactionActivity extends BaseActivity {
 //        mAsyncTask = new GetBalanceTask(getApplicationContext(), this.userProfile);
 //        mAsyncTask.execute((Void) null);
     }
-
-//    private class GetFriendsTask extends FetchBalanceTask {
-//        GetBalanceTask(Context context, UserProfile userProfile) {
-//            super(context, userProfile, User.getJWTToken(context));
-//        }
-//
-//        @Override
-//        protected void onPostExecute(final Float balance) {
-//            mAsyncTask = null;
-//            TextView balance_display = FriendListActivity.this.findViewById(R.id.balance);
-//            balance_display.setText(String.format("%.2f", balance));
-//        }
-//
-//        @Override
-//        protected void onCancelled() {
-//            mAsyncTask = null;
-//        }
-//    }
 }

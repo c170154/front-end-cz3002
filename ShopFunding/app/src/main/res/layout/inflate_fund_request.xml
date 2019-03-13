@@ -11,65 +11,94 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/CardView.Light"
-        app:cardElevation="1dp">
+        app:cardElevation="1dp"
+        android:id="@+id/card_fund_request">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/Widget.MaterialComponents.CardView">
 
+            <ImageView
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:clickable="false"
+                android:contextClickable="false"
+                android:longClickable="false"
+                android:layout_width="100dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/img_product_image" />
+
             <TextView
                 android:text="Contribution #001"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_product_name"
                 android:layout_weight="1"
-                android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toEndOf="@+id/img_product_image"
                 android:layout_marginStart="8dp" />
 
             <TextView
-                android:text="2019-01-01 \n13:00:00"
-                android:layout_width="80dp"
+                android:text="2019-01-01 13:00:00"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_creation_date"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp"
-                android:lines="2"
-                app:layout_constraintStart_toEndOf="@+id/tv_product_name"
-                android:layout_marginStart="8dp" />
+                app:layout_constraintStart_toEndOf="@+id/img_product_image"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
 
             <TextView
                 android:text="S$0"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
                 android:id="@+id/tv_progress"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toEndOf="@+id/tv_creation_date"
-                app:layout_constraintEnd_toStartOf="@+id/tv_goal"
-                android:layout_marginEnd="8dp" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toEndOf="@+id/img_product_image"
+                android:layout_marginStart="10dp"
+                app:layout_constraintHorizontal_bias="0.9"
+                android:textSize="30sp"
+                android:textColor="@android:color/holo_blue_dark"
+                tools:text="100%"
+                app:layout_constraintVertical_bias="0.45" />
 
             <TextView
-                android:text="S$100"
-                android:layout_width="70dp"
+                android:text="Goal: S$100"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_goal"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@+id/tv_creation_date"
+                app:layout_constraintStart_toEndOf="@+id/img_product_image"
+                android:layout_marginStart="8dp" />
+
+            <TextView
+                android:text="funded"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_progress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toEndOf="@+id/img_product_image"
+                android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.9"
+                android:textColor="@android:color/holo_blue_dark"
+                app:layout_constraintVertical_bias="0"
+                android:textSize="12sp"
                 android:textAlignment="textEnd" />
 
         </android.support.constraint.ConstraintLayout>
