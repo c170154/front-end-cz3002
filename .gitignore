@@ -6,3 +6,8 @@
 /build
 /captures
 .externalNativeBuild
+.vscode/settings.json
+ShopFunding/.settings/org.eclipse.buildship.core.prefs
+sample app/.settings/org.eclipse.buildship.core.prefs
+sample app/.project
+ShopFunding/.project

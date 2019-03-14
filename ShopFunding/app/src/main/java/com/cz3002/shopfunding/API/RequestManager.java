@@ -29,6 +29,10 @@ interface ENDPOINTS {
     String CONTRIBUTIONS = "/contributions/";
     String FRIEND_FUND_REQUEST = "/get_friends_fund_request";
     String CONTRIBUTION = FUND_REQUEST + "contributions/";
+
+    String PRODUCT_QUERY = "product_query/";
+    String GET_SHOPEE_CAROUSEL = "ShopeeCarousel";
+    String Get_SHOPEE_PRODUCT = "ShopeeProduct";
 }
 
 public class RequestManager {
