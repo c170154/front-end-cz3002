@@ -9,11 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.cz3002.shopfunding.API.FundRequest;
 import com.cz3002.shopfunding.Adapter.FundRequestListAdapter;
 import com.cz3002.shopfunding.Model.FundingRequest;
 import com.cz3002.shopfunding.Model.UserProfile;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
 
@@ -27,6 +30,8 @@ public class MainActivity extends BaseActivity {
     private RecyclerView.LayoutManager friendRequestLayoutManager;
     private RecyclerView.Adapter friendRequestAdapter;
 
+    CarouselView carouselView;
+    int[] sampleImages = {R.drawable.shopee, R.drawable.iphone};
     // Async API call task
     private GetRequestListTask mGetRequestListTask;
     private GetFriendRequestListTask mGetFriendRequestListTask;
@@ -36,6 +41,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         super.onCreateDrawer();
+
 
         Button test = findViewById(R.id.button_test);
         test.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +61,18 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        ImageListener imageListener = new ImageListener() {
+            @Override
+            public void setImageForPosition(int position, ImageView imageView) {
+                imageView.setImageResource(sampleImages[position]);
+            }
+        };
+
+        carouselView = findViewById(R.id.carouselView);
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(imageListener);
+
+
         // Initialize RecyclerView
         requestRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_my_requests);
         requestLayoutManager = new LinearLayoutManager(this);
@@ -67,6 +85,8 @@ public class MainActivity extends BaseActivity {
         friendRequestRecyclerView.setNestedScrollingEnabled(false);
 
         fetcbRequests();
+
+
     }
 
     @Override
