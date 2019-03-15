@@ -5,6 +5,8 @@ import com.cz3002.shopfunding.Model.Carousel;
 import com.cz3002.shopfunding.Model.Product;
 import com.cz3002.shopfunding.Model.ProductModel;
 import com.cz3002.shopfunding.Model.SearchResult;
+import com.cz3002.shopfunding.API.ENDPOINTS;
+import com.cz3002.shopfunding.API.RequestManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,10 +17,11 @@ import java.util.Set;
 
 public class ProductQuery {
 
-    public ArrayList<Carousel> getShopeeCarousel(final Context context, String url, int numberOfItems) {
+    public ArrayList<Carousel> getShopeeCarousel(final Context context, String baseUrl, int numberOfItems) {
         HashMap<String, String> queryItems = new HashMap<>();
         queryItems.put("nbrOfItems", Integer.toString(numberOfItems));
-        String queryUrl = getUrlBuilder(ENDPOINTS.PRODUCT_QUERY + ENDPOINTS.GET_SHOPEE_CAROUSEL, queryItems);
+        String queryUrl = getUrlBuilder(baseUrl + ENDPOINTS.PRODUCT_QUERY +
+                ENDPOINTS.GET_SHOPEE_CAROUSEL, queryItems);
 
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
         JSONObject json_response = requestManager.getRequest(context, queryUrl);
@@ -43,11 +46,12 @@ public class ProductQuery {
         return null;
     }
 
-    public Product getShopeeProduct(final Context context, String url, int itemId, int shopId) {
+    public Product getShopeeProduct(final Context context, String baseUrl, int itemId, int shopId) {
         HashMap<String, String> queryItems = new HashMap<>();
         queryItems.put("itemId", Integer.toString(itemId));
         queryItems.put("shopId", Integer.toString(shopId));
-        String queryUrl = getUrlBuilder(ENDPOINTS.PRODUCT_QUERY + ENDPOINTS.GET_SHOPEE_PRODUCT, queryItems);
+        String queryUrl = getUrlBuilder(baseUrl + ENDPOINTS.PRODUCT_QUERY +
+                ENDPOINTS.GET_SHOPEE_PRODUCT, queryItems);
 
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
         JSONObject json_response = requestManager.getRequest(context, queryUrl);
@@ -99,10 +103,11 @@ public class ProductQuery {
         return null;
     }
 
-    public ArrayList<SearchResult> getSearchResults(final Context context, String url, String keyword) {
+    public ArrayList<SearchResult> getSearchResults(final Context context, String baseUrl, String keyword) {
         HashMap<String, String> queryItems = new HashMap<>();
         queryItems.put("keyword", keyword);
-        String queryUrl = getUrlBuilder(ENDPOINTS.PRODUCT_QUERY + ENDPOINTS.GET_SHOPEE_SEARCH_RESULTS, queryItems);
+        String queryUrl = getUrlBuilder(baseUrl + ENDPOINTS.PRODUCT_QUERY +
+                ENDPOINTS.GET_SHOPEE_SEARCH_RESULTS, queryItems);
 
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
         JSONObject json_response = requestManager.getRequest(context, queryUrl);
