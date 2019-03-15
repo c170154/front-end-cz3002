@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +9,13 @@
     android:orientation="vertical">
 
     <include layout="@layout/layout_toolbar" />
+
+    <ImageButton
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        app:srcCompat="@android:drawable/ic_menu_search" />
 
     <android.support.v4.widget.DrawerLayout
 
