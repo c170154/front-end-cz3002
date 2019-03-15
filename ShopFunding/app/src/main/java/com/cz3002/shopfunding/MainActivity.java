@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
 import com.cz3002.shopfunding.API.FundRequest;
 import com.cz3002.shopfunding.Adapter.FundRequestListAdapter;
 import com.cz3002.shopfunding.Model.FundingRequest;
@@ -40,6 +42,15 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent activityIntent = new Intent(MainActivity.this, FundRequestActivity.class);
+                startActivity(activityIntent);
+            }
+        });
+
+        ImageButton search = findViewById(R.id.search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent activityIntent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(activityIntent);
             }
         });

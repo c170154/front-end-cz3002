@@ -154,4 +154,3 @@ public class ProductQuery {
         return stringBuilder.toString();
     }
 }
-}
