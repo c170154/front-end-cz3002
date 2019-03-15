@@ -1,8 +1,10 @@
 package com.cz3002.shopfunding;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +56,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> implements Filtera
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                Snackbar.make(v,players.get(pos).getName(),Snackbar.LENGTH_SHORT).show();
+               // Snackbar.make(v,players.get(pos).getName(),Snackbar.LENGTH_SHORT).show();
+                Intent i=new Intent(c,BookDetailActivity.class);
+
+                //ADD DATA TO OUR INTENT
+                i.putExtra("Name",players.get(pos).getName());
+                i.putExtra("Position",players.get(pos).getPos());
+                i.putExtra("Image",players.get(pos).getImg());
+
+                //START DETAIL ACTIVITY
+                c.startActivity(i);
+                Log.e("Hi",   "Click");
             }
         });
 

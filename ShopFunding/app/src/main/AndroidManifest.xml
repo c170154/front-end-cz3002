@@ -24,6 +24,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".BookDetailActivity" />
         <activity
             android:name=".TopUpActivity"
             android:windowSoftInputMode="adjustNothing" />

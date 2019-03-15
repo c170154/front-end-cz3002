@@ -1,5 +1,6 @@
 package com.cz3002.shopfunding;
 
+import android.media.audiofx.LoudnessEnhancer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,11 +10,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -26,15 +29,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main1);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         sv= (SearchView) findViewById(R.id.mSearch);
         RecyclerView rv= (RecyclerView) findViewById(R.id.myRecycler);
@@ -71,39 +65,39 @@ public class SearchActivity extends AppCompatActivity {
     {
         ArrayList<Player> players=new ArrayList<>();
         Player p=new Player();
-        p.setName("Ander Herera");
-        p.setPos("Midfielder");
-        p.setImg(R.drawable.herera);
+        p.setName("APPLE Iphone 5 32gb");
+        p.setPos("IT Devices");
+        p.setImg(R.drawable.shopee);
         players.add(p);
 
         p=new Player();
-        p.setName("David De Geaa");
-        p.setPos("Goalkeeper");
-        p.setImg(R.drawable.degea);
+        p.setName("Men Summer Hip Hop Dovetail");
+        p.setPos("Men's Wear");
+        p.setImg(R.drawable.shopee);
         players.add(p);
 
         p=new Player();
-        p.setName("Michael Carrick");
-        p.setPos("Midfielder");
-        p.setImg(R.drawable.carrick);
+        p.setName("Baseus Donut Wireless Charger");
+        p.setPos("IT Devices");
+        p.setImg(R.drawable.shopee);
         players.add(p);
 
         p=new Player();
-        p.setName("Juan Mata");
-        p.setPos("Playmaker");
-        p.setImg(R.drawable.mata);
+        p.setName("APPLE Iphone 5 32gb");
+        p.setPos("IT Devices");
+        p.setImg(R.drawable.shopee);
         players.add(p);
 
         p=new Player();
-        p.setName("Diego Costa");
-        p.setPos("Striker");
-        p.setImg(R.drawable.costa);
+        p.setName("Vegorrs Couple Installed Short-Sleeved");
+        p.setPos("Men's Wear");
+        p.setImg(R.drawable.shopee);
         players.add(p);
 
         p=new Player();
-        p.setName("Oscar");
-        p.setPos("Playmaker");
-        p.setImg(R.drawable.oscar);
+        p.setName("Marble Phone Case For Iphone");
+        p.setPos("IT Devices");
+        p.setImg(R.drawable.shopee);
         players.add(p);
 
 
