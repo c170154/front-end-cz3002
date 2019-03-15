@@ -32,7 +32,8 @@ interface ENDPOINTS {
 
     String PRODUCT_QUERY = "product_query/";
     String GET_SHOPEE_CAROUSEL = "ShopeeCarousel";
-    String Get_SHOPEE_PRODUCT = "ShopeeProduct";
+    String GET_SHOPEE_PRODUCT = "ShopeeProduct";
+    String GET_SHOPEE_SEARCH_RESULTS = "ShopeeSearchResults";
 }
 
 public class RequestManager {
