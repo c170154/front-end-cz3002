@@ -66,6 +66,17 @@ public class MainActivity extends BaseActivity {
         friendRequestRecyclerView.setLayoutManager(friendRequestLayoutManager);
         friendRequestRecyclerView.setNestedScrollingEnabled(false);
 
+        fetcbRequests();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        fetcbRequests();
+    }
+
+    private void fetcbRequests() {
         mGetRequestListTask = new GetRequestListTask(getApplicationContext(), this.userProfile);
         mGetRequestListTask.execute((Void) null);
 

@@ -32,7 +32,7 @@
                 style="@style/Base.CardView">
 
                 <Button
-                    android:text="Comfirm"
+                    android:text="Confirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_add_contributor"
