@@ -11,3 +11,9 @@ ShopFunding/.settings/org.eclipse.buildship.core.prefs
 sample app/.settings/org.eclipse.buildship.core.prefs
 sample app/.project
 ShopFunding/.project
+sample app/app/src/main/gen/com/hosamazzam/apps/shoply/BuildConfig.java
+sample app/app/src/main/gen/com/hosamazzam/apps/shoply/Manifest.java
+sample app/app/src/main/gen/com/hosamazzam/apps/shoply/R.java
+ShopFunding/app/src/main/gen/com/cz3002/shopfunding/BuildConfig.java
+ShopFunding/app/src/main/gen/com/cz3002/shopfunding/Manifest.java
+ShopFunding/app/src/main/gen/com/cz3002/shopfunding/R.java

@@ -13,58 +13,62 @@ import java.util.ArrayList;
 public class ProductQuery {
 
     public ArrayList<Carousel> getShopeeCarousel(final Context context, String url, int numberOfItems){
-        var requestManager = RequestManager.getInstance(context.getApplicationContext());
-        JSONArray json_response = requestManager.getRequest_JSONArray(
+        RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
+        JSONObject json_response = requestManager.getRequest(
                 context, ENDPOINTS.PRODUCT_QUERY + ENDPOINTS.GET_SHOPEE_CAROUSEL + "?" + "nbrOfItems=" + numberOfItems);
 
         if (json_response != null) {
-            var carouselArrayList  = new ArrayList<Carousel>();
+            ArrayList<Carousel> carouselArrayList  = new ArrayList<Carousel>();
 
             try {
-                    var jsonArrayList = json_response.getJsonArray("items");
-                    for (var item: jsonArrayList) {
-                        var carousel = new Carousel();
-                        carousel.setItemId(item.getJsonObject("itemId"));
-                        carousel.setShopId(item.getJsonObject("shopId"));
-                        carousel.setImage(item.getJsonObject("image"));
-                        carouselArrayList.add(carousel)
+                    JSONArray jsonArrayList = json_response.getJSONArray("items");
+                    for (int i =0; i< jsonArrayList.length(); i++) {
+                        Carousel carousel = new Carousel();
+                        carousel.setItemId(jsonArrayList.getJSONObject(i).getInt("itemId"));
+                        carousel.setShopId(jsonArrayList.getJSONObject(i).getInt("shopId"));
+                        carousel.setImage(jsonArrayList.getJSONObject(i).getString("image"));
+                        carouselArrayList.add(carousel);
                     }
+                    return carouselArrayList;
                 } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            return carouselArrayList;
         }
-
         return null;
     }
 
     public Product getShopeeProduct(final Context context, String url, int itemId, int shopId) {
-        var requestManager = RequestManager.getInstance(context.getApplicationContext());
-        JSONArray json_response = requestManager.getRequest_JSONArray(
-                context, ENDPOINTS.PRODUCT_QUERY + ENDPOINTS.GET_SHOPEE_PRODUCT + "?" + "itemId=" + itemId + "&" +
+        RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
+        JSONObject json_response = requestManager.getRequest(
+                context, ENDPOINTS.PRODUCT_QUERY + ENDPOINTS.Get_SHOPEE_PRODUCT + "?" + "itemId=" + itemId + "&" +
                         "shopId=" + shopId);
 
         if (json_response != null) {
             try {
-                var product = new Product();
-                product.setName(json_response.getJsonObject("name"));
-                product.setItemId(json_response.getJsonObject("itemId"));
-                product.setShopId(json_response.getJsonObject("shopId"));
-                product.setImageLinks(json_response.getJsonArray("imageLinks"));
-                var models = json_response.getJsonArray("models");
-                var productModels = new ArrayList<ProductModel>();
+                Product product = new Product();
+                product.setName(json_response.getString("name"));
+                product.setItemId(json_response.getInt("itemId"));
+                product.setShopId(json_response.getInt("shopId"));
 
-                for (var model: models) {
-                    var productModel = new ProductModel();
-                    productModel.setItemId(model.getJsonObject("itemid"));
-                    productModel.setName(model.getJsonObject("name"));
-                    productModel.setPromotionId(model.getJsonObject("promotionid"));
-                    productModel.setPrice(model.getJsonObject("price"));
-                    productModel.setCurrency(model.getJsonObject("currency"));
-                    productModel.setModelId(model.getJsonObject("modelid"));
-                    productModel.setSold(model.getJsonObject("sold"));
-                    productModel.setStock(model.getJsonObject("stock"));
+                JSONArray jsonImageLinks = json_response.getJSONArray("imageLinks");
+                ArrayList<String> imageLinks = new ArrayList<>();
+                for (int i = 0 ; i < jsonImageLinks.length(); i++){
+                    imageLinks.add(jsonImageLinks.getString(i));
+                }
+                product.setImageLinks(imageLinks);
+
+                JSONArray models = json_response.getJSONArray("models");
+                ArrayList<ProductModel> productModels = new ArrayList<>();
+                for (int i =0; i < models.length(); i++) {
+                    ProductModel productModel = new ProductModel();
+                    productModel.setItemId(models.getJSONObject(i).getInt("itemid"));
+                    productModel.setName(models.getJSONObject(i).getString("name"));
+                    productModel.setPromotionId(models.getJSONObject(i).getInt("promotionid"));
+                    productModel.setPrice(models.getJSONObject(i).getDouble("price"));
+                    productModel.setCurrency(models.getJSONObject(i).getString("currency"));
+                    productModel.setModelId(models.getJSONObject(i).getInt("modelid"));
+                    productModel.setSold(models.getJSONObject(i).getInt("sold"));
+                    productModel.setStock(models.getJSONObject(i).getInt("stock"));
                     productModels.add(productModel);
                 }
 
@@ -74,15 +78,15 @@ public class ProductQuery {
                     product.setModels(null);
                 }
 
-                product.setMinPrice(json_response.getJsonObject("minPrice"));
-                product.setShippingFee(json_response.getJsonObject("shippingFee"));
-                product.setDescription(json_response.getJsonObject("description"));
+                product.setMinPrice(json_response.getDouble("minPrice"));
+                product.setShippingFee(json_response.getDouble("shippingFee"));
+                product.setDescription(json_response.getString("description"));
 
+                return  product;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
-        return;
+        return null;
     }
 }
