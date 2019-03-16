@@ -1,101 +1,87 @@
 package com.cz3002.shopfunding;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import com.cz3002.shopfunding.API.ProductQuery;
+import com.cz3002.shopfunding.Adapter.ProductAdapter;
+import com.cz3002.shopfunding.Model.Product;
+import com.cz3002.shopfunding.Model.SearchResult;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends BaseActivity {
+    RecyclerView rv;
+    ProgressBar progressBar;
 
-
-   SearchView sv;
+    FetchProductsTask mFetchProductsTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        super.onCreateDrawer();
+        getSupportActionBar().setTitle("Product Search");
 
-        sv= (SearchView) findViewById(R.id.mSearch);
-        RecyclerView rv= (RecyclerView) findViewById(R.id.myRecycler);
+        progressBar = findViewById(R.id.progress_fetch_product);
 
-        //SET ITS PROPETRIES
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setItemAnimator(new DefaultItemAnimator());
-
-        //ADAPTER
-        final MyAdapter adapter=new MyAdapter(this,getPlayers());
-        rv.setAdapter(adapter);
-
-        //SEARCH
+        SearchView sv = (SearchView) findViewById(R.id.searchview);
+        sv.setIconifiedByDefault(false);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                progressBar.setVisibility(View.VISIBLE);
+
+                mFetchProductsTask = new FetchProductsTask(getApplicationContext(), query);
+                mFetchProductsTask.execute((Void) null);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                //FILTER AS YOU TYPE
-                adapter.getFilter().filter(query);
                 return false;
             }
         });
 
-
-
+        rv = (RecyclerView) findViewById(R.id.recyclerview_product);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setItemAnimator(new DefaultItemAnimator());
     }
 
-    //ADD PLAYERS TO ARRAYLIST
-    private ArrayList<Player> getPlayers()
-    {
-        ArrayList<Player> players=new ArrayList<>();
-        Player p=new Player();
-        p.setName("APPLE Iphone 5 32gb");
-        p.setPos("IT Devices");
-        p.setImg(R.drawable.shopee);
-        players.add(p);
+    class FetchProductsTask extends AsyncTask<Void, Void, ArrayList<SearchResult>> {
+        private final Context mContext;
+        private final String mKeyword;
 
-        p=new Player();
-        p.setName("Men Summer Hip Hop Dovetail");
-        p.setPos("Men's Wear");
-        p.setImg(R.drawable.shopee);
-        players.add(p);
+        public FetchProductsTask(Context context, String keyword) {
+            mContext = context;
+            mKeyword = keyword;
+        }
 
-        p=new Player();
-        p.setName("Baseus Donut Wireless Charger");
-        p.setPos("IT Devices");
-        p.setImg(R.drawable.shopee);
-        players.add(p);
+        @Override
+        protected ArrayList<SearchResult> doInBackground(Void... params) {
+            return ProductQuery.getSearchResults(mContext, mKeyword);
+        }
 
-        p=new Player();
-        p.setName("APPLE Iphone 5 32gb");
-        p.setPos("IT Devices");
-        p.setImg(R.drawable.shopee);
-        players.add(p);
+        @Override
+        protected void onPostExecute(final ArrayList<SearchResult> searchResults) {
+            mFetchProductsTask = null;
 
-        p=new Player();
-        p.setName("Vegorrs Couple Installed Short-Sleeved");
-        p.setPos("Men's Wear");
-        p.setImg(R.drawable.shopee);
-        players.add(p);
-
-        p=new Player();
-        p.setName("Marble Phone Case For Iphone");
-        p.setPos("IT Devices");
-        p.setImg(R.drawable.shopee);
-        players.add(p);
-
-
-        return players;
+            if (searchResults != null) {
+                final ProductAdapter adapter = new ProductAdapter(searchResults);
+                progressBar.setVisibility(View.GONE);
+                rv.setAdapter(adapter);
+            }
+        }
     }
-
-
-
 }

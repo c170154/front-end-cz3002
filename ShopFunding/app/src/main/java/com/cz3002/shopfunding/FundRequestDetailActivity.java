@@ -8,14 +8,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.*;
 import com.cz3002.shopfunding.API.FundRequest;
 import com.cz3002.shopfunding.Adapter.ContributorAdapter;
 import com.cz3002.shopfunding.Model.Contribution;
 import com.cz3002.shopfunding.Model.FundingRequest;
+import com.squareup.picasso.Picasso;
 
 public class FundRequestDetailActivity extends BaseActivity {
     // RecyclerView
@@ -88,6 +86,13 @@ public class FundRequestDetailActivity extends BaseActivity {
             ((TextView) findViewById(R.id.tv_product_name)).setText(fundingRequest.getProductName());
             ((TextView) findViewById(R.id.tv_product_description)).setText(fundingRequest.getDescription());
             ((TextView) findViewById(R.id.tv_total_price)).setText("S$" + Float.toString(fundingRequest.getGoal()));
+            ImageView imageView = findViewById(R.id.image_product);
+            Picasso.get()
+                    .load(fundingRequest.getUrl())
+                    .placeholder(R.drawable.progress_animation)
+                    .fit()
+                    .centerInside()
+                    .into(imageView);
         }
     }
 
@@ -97,7 +102,6 @@ public class FundRequestDetailActivity extends BaseActivity {
         if (amountFunded == goal) {
             ((TextView) findViewById(R.id.tv_progress)).setText(
                     "This item is fully funded and it is on its way! Good Job!");
-            ((TextView) findViewById(R.id.tv_progress)).setTextColor(Color.GREEN);
         } else {
             ((TextView) findViewById(R.id.tv_progress)).setText("S$" + amountFunded + " out of S$" + goal + " funded");
         }

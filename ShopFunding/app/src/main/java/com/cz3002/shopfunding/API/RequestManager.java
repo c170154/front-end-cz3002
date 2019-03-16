@@ -3,8 +3,9 @@ package com.cz3002.shopfunding.API;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
-import android.util.Log;
-import com.android.volley.*;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,9 +32,9 @@ interface ENDPOINTS {
     String CONTRIBUTION = FUND_REQUEST + "contributions/";
 
     String PRODUCT_QUERY = "product_query/";
-    String GET_SHOPEE_CAROUSEL = "ShopeeCarousel";
-    String GET_SHOPEE_PRODUCT = "ShopeeProduct";
-    String GET_SHOPEE_SEARCH_RESULTS = "ShopeeSearchResults";
+    String GET_SHOPEE_CAROUSEL = BACKEND_BASE_URL + PRODUCT_QUERY + "ShopeeCarousel";
+    String GET_SHOPEE_PRODUCT = BACKEND_BASE_URL + PRODUCT_QUERY + "ShopeeProduct";
+    String GET_SHOPEE_SEARCH_RESULTS = BACKEND_BASE_URL + PRODUCT_QUERY + "ShopeeSearchResults";
 }
 
 public class RequestManager {

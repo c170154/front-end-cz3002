@@ -111,7 +111,8 @@
         android:gravity="center|start"
         android:text=" About"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/menu_logout"

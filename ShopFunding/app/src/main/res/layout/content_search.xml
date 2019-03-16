@@ -4,36 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.cz3002.shopfunding.SearchActivity"
     tools:showIn="@layout/activity_search">
 
-    <LinearLayout
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchview"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
 
-        <android.support.v7.widget.SearchView
-            android:id="@+id/mSearch"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+        app:defaultQueryHint="Search.."
 
-            app:defaultQueryHint="Search.."
+        ></android.support.v7.widget.SearchView>
 
-            ></android.support.v7.widget.SearchView>
+    <ProgressBar
+        android:id="@+id/progress_fetch_product"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        android:layout_below="@+id/searchview"
+        android:foregroundGravity="center"
+        android:layout_centerInParent="true" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/myRecycler"
-            android:layout_width="wrap_content"
-            android:layout_below="@+id/mSearch"
-            android:layout_height="wrap_content"
-            class="android.support.v7.widget.RecyclerView" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_product"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/searchview"
+        android:layout_height="wrap_content"
+        class="android.support.v7.widget.RecyclerView" />
 
-
-
-    </LinearLayout>
 </RelativeLayout>

@@ -17,11 +17,10 @@ import java.util.Set;
 
 public class ProductQuery {
 
-    public ArrayList<Carousel> getShopeeCarousel(final Context context, String baseUrl, int numberOfItems) {
+    public static ArrayList<Carousel> getShopeeCarousel(final Context context, int numberOfItems) {
         HashMap<String, String> queryItems = new HashMap<>();
         queryItems.put("nbrOfItems", Integer.toString(numberOfItems));
-        String queryUrl = getUrlBuilder(baseUrl + ENDPOINTS.PRODUCT_QUERY +
-                ENDPOINTS.GET_SHOPEE_CAROUSEL, queryItems);
+        String queryUrl = getUrlBuilder(ENDPOINTS.GET_SHOPEE_CAROUSEL, queryItems);
 
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
         JSONObject json_response = requestManager.getRequest(context, queryUrl);
@@ -46,12 +45,11 @@ public class ProductQuery {
         return null;
     }
 
-    public Product getShopeeProduct(final Context context, String baseUrl, int itemId, int shopId) {
+    public static Product getShopeeProduct(final Context context, int itemId, int shopId) {
         HashMap<String, String> queryItems = new HashMap<>();
         queryItems.put("itemId", Integer.toString(itemId));
         queryItems.put("shopId", Integer.toString(shopId));
-        String queryUrl = getUrlBuilder(baseUrl + ENDPOINTS.PRODUCT_QUERY +
-                ENDPOINTS.GET_SHOPEE_PRODUCT, queryItems);
+        String queryUrl = getUrlBuilder(ENDPOINTS.GET_SHOPEE_PRODUCT, queryItems);
 
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
         JSONObject json_response = requestManager.getRequest(context, queryUrl);
@@ -103,11 +101,10 @@ public class ProductQuery {
         return null;
     }
 
-    public ArrayList<SearchResult> getSearchResults(final Context context, String baseUrl, String keyword) {
+    public static ArrayList<SearchResult> getSearchResults(final Context context, String keyword) {
         HashMap<String, String> queryItems = new HashMap<>();
         queryItems.put("keyword", keyword);
-        String queryUrl = getUrlBuilder(baseUrl + ENDPOINTS.PRODUCT_QUERY +
-                ENDPOINTS.GET_SHOPEE_SEARCH_RESULTS, queryItems);
+        String queryUrl = getUrlBuilder(ENDPOINTS.GET_SHOPEE_SEARCH_RESULTS, queryItems);
 
         RequestManager requestManager = RequestManager.getInstance(context.getApplicationContext());
         JSONObject json_response = requestManager.getRequest(context, queryUrl);
@@ -124,7 +121,7 @@ public class ProductQuery {
                     searchResult.setName(items.getJSONObject(i).getString("name"));
 
                     ArrayList<String> imageLinks = new ArrayList<>();
-                    JSONArray imagesJsonArray = items.getJSONArray(i);
+                    JSONArray imagesJsonArray = items.getJSONObject(i).getJSONArray("images");
                     for (int j = 0; j < imagesJsonArray.length(); j++) {
                         imageLinks.add(imagesJsonArray.getString(j));
                     }
@@ -140,7 +137,7 @@ public class ProductQuery {
         return null;
     }
 
-    private String getUrlBuilder (String url, HashMap < String, String > params){
+    private static String getUrlBuilder (String url, HashMap < String, String > params){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(url);
 

@@ -7,4 +7,5 @@
     <color name="bg_gray">#e6e6e5</color>
 
     <color name="dark_gray">#263238</color>
+    <color name="carousel_background">#1e616161</color>
 </resources>

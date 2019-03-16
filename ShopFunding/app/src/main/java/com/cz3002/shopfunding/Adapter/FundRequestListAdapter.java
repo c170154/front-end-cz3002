@@ -8,12 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.cz3002.shopfunding.API.FundRequest;
 import com.cz3002.shopfunding.FundRequestActivity;
 import com.cz3002.shopfunding.FundRequestDetailActivity;
 import com.cz3002.shopfunding.Model.FundingRequest;
 import com.cz3002.shopfunding.R;
+import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class FundRequestListAdapter extends RecyclerView.Adapter<FundRequestList
         private TextView date;
         private TextView progress;
         private TextView goal;
+        private ImageView imageView;
 
         private Context context;
 
@@ -43,6 +46,7 @@ public class FundRequestListAdapter extends RecyclerView.Adapter<FundRequestList
             this.date = v.findViewById(R.id.tv_creation_date);
             this.progress = v.findViewById(R.id.tv_progress);
             this.goal = v.findViewById(R.id.tv_goal);
+            this.imageView = v.findViewById(R.id.image_product);
 
             context = v.getContext();
         }
@@ -68,6 +72,12 @@ public class FundRequestListAdapter extends RecyclerView.Adapter<FundRequestList
         float progress = (goal - fundRequest.getmRemainingFund()) / goal;
         holder.goal.setText("Goal: S$" + goal);
         holder.progress.setText(NumberFormat.getPercentInstance(Locale.US).format(progress));
+        Picasso.get()
+                .load(fundRequest.getUrl())
+                .placeholder(R.drawable.progress_animation)
+                .fit()
+                .centerInside()
+                .into(holder.imageView);
 
         // onClick handler to navigate to contribute activity
         holder.fundRequest.setOnClickListener(new View.OnClickListener() {
