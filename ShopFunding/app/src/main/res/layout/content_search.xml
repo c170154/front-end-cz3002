@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.cz3002.shopfunding.SearchActivity"
-    tools:showIn="@layout/activity_main1">
+    tools:showIn="@layout/activity_search">
 
     <LinearLayout
         android:layout_width="match_parent"
