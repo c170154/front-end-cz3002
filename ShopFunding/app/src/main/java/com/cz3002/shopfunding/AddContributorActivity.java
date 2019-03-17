@@ -33,7 +33,7 @@ public class AddContributorActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contributor);
         super.onCreateDrawer();
-        getSupportActionBar().setTitle("Add Contribution(s)");
+        getSupportActionBar().setTitle("Add Contributor(s)");
 
         selectedUsername = new ArrayList<>();
 
