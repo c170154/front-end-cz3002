@@ -8,15 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import com.cz3002.shopfunding.API.ProductQuery;
 import com.cz3002.shopfunding.Adapter.ProductAdapter;
-import com.cz3002.shopfunding.Model.Product;
 import com.cz3002.shopfunding.Model.SearchResult;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

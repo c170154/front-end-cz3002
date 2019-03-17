@@ -1,14 +1,11 @@
 package com.cz3002.shopfunding;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,8 +14,6 @@ import android.widget.Toast;
 import com.cz3002.shopfunding.API.FundRequest;
 import com.cz3002.shopfunding.API.ProductQuery;
 import com.cz3002.shopfunding.Adapter.FriendListAdapter;
-import com.cz3002.shopfunding.Helper.DownloadImageTask;
-import com.cz3002.shopfunding.Model.FundingRequest;
 import com.cz3002.shopfunding.Model.Product;
 import com.cz3002.shopfunding.Model.UserProfile;
 import com.squareup.picasso.Picasso;

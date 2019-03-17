@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import com.alexzh.circleimageview.CircleImageView;
 import com.alexzh.circleimageview.ItemSelectedListener;
-import com.cz3002.shopfunding.*;
 import com.cz3002.shopfunding.API.User;
+import com.cz3002.shopfunding.*;
 import com.cz3002.shopfunding.Model.UserProfile;
 
 public class SideNavigation {

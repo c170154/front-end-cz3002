@@ -1,7 +1,6 @@
 package com.cz3002.shopfunding.API;
 
 import android.content.Context;
-import android.util.Log;
 import com.cz3002.shopfunding.Model.Contribution;
 import com.cz3002.shopfunding.Model.FundingRequest;
 import org.json.JSONArray;

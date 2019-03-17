@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+
 import java.io.InputStream;
 
 // Deprecated. Replaced by Picasso API

@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.cz3002.shopfunding.API.FundRequest;
-import com.cz3002.shopfunding.FundRequestActivity;
 import com.cz3002.shopfunding.FundRequestDetailActivity;
 import com.cz3002.shopfunding.Model.FundingRequest;
 import com.cz3002.shopfunding.R;

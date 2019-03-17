@@ -1,6 +1,6 @@
 package com.cz3002.shopfunding.Model;
+
 import java.util.ArrayList;
-import com.cz3002.shopfunding.Model.ProductModel;
 
 public class Product {
     private String name;

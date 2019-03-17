@@ -5,7 +5,7 @@ import android.support.test.InstrumentationRegistry;
 import org.junit.Test;
 
 import static com.cz3002.shopfunding.API.User.getJWTToken;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
 
 public class LoginActivityTest {
 

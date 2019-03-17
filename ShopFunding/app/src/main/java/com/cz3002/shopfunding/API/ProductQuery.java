@@ -5,8 +5,6 @@ import com.cz3002.shopfunding.Model.Carousel;
 import com.cz3002.shopfunding.Model.Product;
 import com.cz3002.shopfunding.Model.ProductModel;
 import com.cz3002.shopfunding.Model.SearchResult;
-import com.cz3002.shopfunding.API.ENDPOINTS;
-import com.cz3002.shopfunding.API.RequestManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
